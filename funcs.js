@@ -1,278 +1,140 @@
+ var player_url = {
+   'KIMPEMBE':"MoyUcwO",'ALDERWEIRELD':"YqoqxR4",'BOATENG':"Xc3Aj0A",'BONUCCI':"XnPY8Dl",'CHIELLINI':"hjC8glZ",'DE_LIGT':"8Xbc5ee",'GODIN':"nhrSRjz",'VERTONGHEN':"hNte4i5",'GOMEZ':"nEDeySE",
+   'HUMMELS':"WpecmqN",'KOMPANY':"mxEdXLN",'KOULIBALY':"mxfiG6j",'STONES':"PQTRtZH",'LOVREN':"j0im63A",'LUIZ':"CDBVlkm",'MAGUIRE':"0dgsuJa",'MANOLAS':"iE65ZA3",'MIRANDA':"RMeQjmo",'MUSTAFI':"GOUlDAC",
+   'PIQUE':"Pwj4JnM",'RAMOS':"tLt2O1P",'RUDIGER':"CgOKm6b",'SULE':"NACTFSw",'VARANE':"RBgLWsq",'SKRINIAR':"5jjFAjK",'VAN_DIJK':"AT3BvAH",'VIDA':"rPNOeEB",'SOKRATIS':"eTnhvOK",'T.SILVA':"WAivNSC",
+   'UMTITI':"72BI1zZ",'LAPORTE':"WCQMaPi",'SMALLING':"tROFV69",'Savic':"mxvsPpx",'Silva':"b76nkEx",'Kroos':"3DJBlWz",'Vidal':"HKiqQAA",'Pjanic':"vVg7kKw",'Pogba':"fD4fsIy",'Rakitic':"kYoTRxg",
+   'Ozil':"qxZlBVG",'Matuidi':"PffGETw",'Busquets':"abJ2fCf",'Alli':"Toga0ta",'Casemiro':"QcD0nux",'Modric':"ZGrETbD",'James':"665PBeR",'Jorginho':"5jMkD50",'Kante':"A51UKpB",'DeBruyne':"VGCxUx7",'Eriksen':"lKGaMN2"
+ };
+ var talent_url = {
+   'Heading':'mGWdekY','Dribble':'r6dB2hr','Leadership':'Verc6sj','Passing':'iMhzjM9','Shooting':'GO0pZAW','Speed':'OfhAtI8',
+   'Stamina':'7RRsM4z','Strength':'ID0zMSM','Tackle':'VBRKnot','Technic':'96HuKxy'
+ };
+ var dream_url = {
+   'ATHENS':"NVMHv0a",
+   'BANGKOK':"T2wQNRO",
+   'BIG':"adADMdX",
+   'CLUB':"X3hR2aI",
+   'COMPACT':"qzLWUeq",
+   'BRAND':"QeWwz5K",
+   'NEWYORK':"vJfBUXd",
+   'PARTY':"sAEvZ9s",
+   'DUBAI':"cVCIerv",
+   'HANDMADE':"at9Y2sH"
+ };
+ var whoameye_hint = {
+   'DeBruyne':"gasGjX0",'DeGea':"Cej67U3",'Dybala':"KPXrwZe",'Griezmann':"J4b3bs1",'Hazard':"9JHq4d0",'Iniesta':"wl2FwjY",'Kroos':"Tcmw1lZ",'Mbappe':"HP9AUjg",
+   'Messi':"R9au7ml",'Neuer':"34bRfGj",'Neymar':"zKj95VT",'Pique':"mARHoWx",'Ramos':"gX4dMw2",'Ronaldo':"5Ih8cJz",'Salah':"JJrR6T6",'Suarez':"140f08x"
+ };
+ var whoameye_eye = {
+   'DeBruyne':"oW1IBo1",'DeGea':"YtrJ0yJ",'Dybala':"4tXcuAq",'Griezmann':"9aKtHUa",'Hazard':"jkznD6D",'Iniesta':"HYbwNfp",'Kroos':"iSZ9nWu",'Mbappe':"ue19zf3",
+   'Messi':"CW82Di5",'Neuer':"LnIQuOu",'Neymar':"tn2dJzW",'Pique':"XQ9N8Nm",'Ramos':"ncMwFmj",'Ronaldo':"8ANa7aL",'Salah':"AO9m1NJ",'Suarez':"RafslXc"
+ };
+ var src_host = 'https://i.imgur.com/';
 
+function get_img_src(url){
+  var src = src_host+url+'.png';
+  return src;
+}
+   var url_host = 'http://footballdor.com/';
+//   var src_host = 'http://localhost:81/wordpress/';
+//   var url_host = 'http://localhost:81/wordpress/';
 
- var	clsStopwatch = function() {
- 		// Private vars
- 		var	startAt	= 0;	// Time of last start / resume. (0 if not running)
- 		var	lapTime	= 0;	// Time on the clock when last stopped in milliseconds
+// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 월드컵 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
- 		var	now	= function() {
- 				return (new Date()).getTime();
- 			};
+var worldcup_arr;
+var worldcup_selected = [];
+var worldcup_round;
 
- 		// Public methods
- 		// Start or resume
- 		this.start = function() {
- 				startAt	= startAt ? startAt : now();
- 			};
+var champion;
+var runner_up;
 
- 		// Stop or pause
- 		this.stop = function() {
- 				// If running, update elapsed time otherwise keep it
- 				lapTime	= startAt ? lapTime + now() - startAt : lapTime;
- 				startAt	= 0; // Paused
- 			};
+function worldcup_set(res){
+  worldcup_arr = JSON.parse(res.value);
 
- 		// Reset
- 		this.reset = function() {
- 				lapTime = startAt = 0;
- 			};
+  $('.game-item.worldcup').css('flex-direction', 'row');
+  $('.game-item.desc').html('ROUND OF 32');
 
- 		// Duration
- 		this.time = function() {
- 				return lapTime + (startAt ? now() - startAt : 0);
- 			};
- 	};
- var x = new clsStopwatch();
- var $time;
- var clocktimer;
- function pad(num, size) {
- 	var s = "0000" + num;
- 	return s.substr(s.length - size);
- }
- function formatTime(time) {
- 	var h = m = s = ms = 0;
- 	var newTime = '';
-
- 	h = Math.floor( time / (60 * 60 * 1000) );
- 	time = time % (60 * 60 * 1000);
- 	m = Math.floor( time / (60 * 1000) );
- 	time = time % (60 * 1000);
- 	s = Math.floor( time / 1000 );
- 	ms = time % 1000;
-
- 	newTime = pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2) + ':' + pad(ms, 3);
- 	return newTime;
- }
- function show() {
- 	$time = document.getElementById('time');
- 	update();
- }
- function update() {
- 	$time.innerHTML = formatTime(x.time());
- }
-
- function stop() {
- 	x.stop();
- 	clearInterval(clocktimer);
- }
- function reset() {
- 	stop();
- 	x.reset();
- 	update();
- }
-
- // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ COMMON 공통 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
- //var src_host = 'http://shupa13.cafe24.com/';
- //var url_host = 'http://footballdor.com/';
-   var src_host = 'http://localhost:81/wordpress/';
-   var url_host = 'http://localhost:81/wordpress/';
-
- function record_form(game, record){
-
-   var form =
-   `
-    <form action = "`+url_host+game+`_process" method = "POST">
-      <input style = "margin-bottom: 5px" type = "text" name = "user" placeholder = "input name">
-      <input style = "margin-bottom: 10px" type = "text" name = "nation" placeholder = "input country">
-      <input type = "hidden" name = "record" value =`+record+`>
-      <input type = "hidden" name = "team" value =`+selected_team[0]+`>
-    <input type = "submit" value = "Submit my record">
-   </form>`
-   return form;
- }
-
- // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Log in 로그인 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
- var checkLoginStatus = function(response){
-   console.log(response);
-   // statusChangeCallback(response);
-   if(response.status == 'connected'){
-     //document.querySelector('#authBtn').value = 'Logout';
-     $('#authBtn').val('Logout');
-     FB.api('/me', function(resp){
-       $('.myname').html(resp.name);
-     });
-   }else {
-     //document.querySelector('#authBtn').value = 'Login';
-     $('#authBtn').val('Login');
-     $('.myname').html("");
-   }
- }
-
-function facebook_log(status){
-  if(status.value == 'Login'){
-    FB.login(function(res){
-      console.log('login =>', res)
-      checkLoginStatus(res);
-    });
-
-
-  //  $('#authBtn').val('Logout');
-
-  }else{
-    FB.logout(function(res){
-      console.log('logout =>', res)
-      checkLoginStatus(res);
-    });
-//    $('#authBtn').val('Login');
-  }
+  shuffle(worldcup_arr);
+  worldcup_start();
 }
 
-function instagram_log(){
+function worldcup_start(){
 
-  var insta_set = {
-    "clientID" : "dbfdc2aae60d47a083abb536c80fb10f",
-    "clientSecret" : "5defbb18dd1d4e86a3a2221bba8109c1",
-    "redirectURI" : "http://localhost:81/wordpress/"
-  };
-  location.href = "https://api.instagram.com/oauth/authorize/?client_id="+insta_set['clientID']+"&redirect_uri="+insta_set['redirectURI']+"&response_type=code";
-}
-
-
- // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ REFLEX 리플렉스 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
- var reflex_list;
- var reflex_ran = [];
- var reflex_ans;
- var reflex_stage = 0;
- var reflex_record;
- var reflex_result;
- var reflexT;
- const src_reflex = src_host+"wp-content/uploads/reflex/";
- const reflex_final = 10;
-
- function reflex_get_data(res){
-   reflex_list = JSON.parse(res.value);
-   reflex_record = [];
-   reflex_set();
- }
- function reflex_set(){
-   reflex_stage++;
-   reflexT = 0;
-
-   reflex_ran =[];
-   for(var i=0; i<3; i++){
-     var temp = reflex_list[Math.floor((Math.random()*20))];
-     while(reflex_ran.includes(temp)){
-       var temp = reflex_list[Math.floor((Math.random()*20))];
-     }
-     reflex_ran.push(temp);
-   }
-   reflex_ans = reflex_ran[Math.floor((Math.random()*2))];
-   reflex_ready();
- }
- function reflex_ready(){
-   var time_ready = 2;
-   $('.game-container.reflex').css('display', 'inline');
-   $('.game-container.reflex').html('<h1>'+time_ready+'</h1>');
-   $('.stage_showing').html('stage : <font color="red">'+reflex_stage+'/'+reflex_final+'</font>');
-
-//   document.querySelector('.game-container.reflex').style = "display: inline";
-//   document.querySelector('.game-container.reflex').innerHTML = '<h1>'+time_ready+'</h1>';
-
-   tid = setInterval(function(){
-     time_ready = time_ready-1;
-     $('.game-container.reflex').html('<h1>'+time_ready+'</h1>');
-  //   document.querySelector('.game-container.reflex').innerHTML = '<h1>'+time_ready+'</h1>';
-     if(time_ready == 0){
-       clearInterval(tid);
-       reflex_start();
-     }
-   }, 1000)
- }
-
- function reflex_start(){
-   reflex_TimeStart();
-   $('.game-container.reflex').css({
-     'display' : 'grid',
-     'grid-template-columns' : '1fr 1fr 1fr 1fr'
-   });
-//   document.querySelector('.game-container.reflex').style = "display: grid; grid-template-columns: 1fr 1fr 1fr 1fr";
-   var msg =[];
-   for(var i=0; i<reflex_ran.length; i++){
-     var temp = '<img class = "img_cell reflex" onclick = \'check_reflex("'+reflex_ran[i]+'")\' src = "'+src_reflex+'answer/'+reflex_ran[i]+'.png">';
-     msg.push(temp);
-   }
-   var temp = '<img class = "img_cell sellect"  src = "'+src_reflex+'hint/'+reflex_ans+'.png">';
-   msg.push(temp);
-   shuffle(msg);
-
-   const reducer = (accumulator, currentValue) => accumulator + currentValue;
-   $('.game-container.reflex').html(msg.reduce(reducer));
-//   document.querySelector('.game-container.reflex').innerHTML = msg.reduce(reducer);
- }
-
- function check_reflex(res){
-   clearInterval(tid);		// 타이머 해제
-
-   var back_color;
-   if(res == reflex_ans){
-     // 정답
-     back_color = '#51ff00'
-   }else {
-     // 오답
-     back_color = 'red';
-     reflexT = parseFloat(reflexT+1);
-   }
-   reflex_record.push(reflexT.toFixed(2));
-
-   $('.game-box').css('backgroundColor', back_color);
-//   document.querySelector('.game-box').style.backgroundColor = back_color;
-   setTimeout(function(){
-     $('.game-box').css('backgroundColor', '#efefef');
-//     document.querySelector('.game-box').style.backgroundColor = '#efefef';
-     if(reflex_stage == reflex_final){
-       reflex_result=0;
-       for(var i=0; i<reflex_record.length; i++){
-         reflex_result = reflex_result + parseFloat(reflex_record[i]);
-       }
-       reflex_result = (reflex_result/10).toFixed(2);
-       show_reflex_msg();
-     }else {
-       reflex_set();
-     }
-    }, 300);
- }
- function reflex_TimeStart(){
-   tid=setInterval(function(){
-     reflexT = parseFloat(reflexT+0.01);
-     if (reflexT > 20) {			// 시간이 종료 되었으면..
-       clearInterval(tid);}
-     },10);
-  }
-  function show_reflex_msg(){
-    var showing_msg;
-    if(reflex_result<1){
-      showing_msg = 'What are you doing here ? Go BayernMunich and have competition with ManuelNeuer !'
-    }else if (reflex_result<2) {
-      showing_msg = 'You have absolutely awesom reflex talent !'
-    }else if (reflex_result<3) {
-      showing_msg = 'Not bad but you can be better!'
-    }else {
-      showing_msg = 'You didn\'t Concentrate. right? try again !'
-    }
+  if (worldcup_arr.length == 0) {
+    worldcup_initialize();
+  }else {
     var msg =
-        '<img class = "img_cell" src = "'+src_reflex+'wp-content/uploads/inner_thumbnail/reflex.jpg">'+
-        '<div style = "padding: 0 20px"><h4>My result : <font color ="red">'+reflex_result+'</font></h4><h6>'+showing_msg+'</h6>'+record_form('reflex', reflex_record);
+    `<div>
+      <input class = "img_cell" type="image" value="`+worldcup_arr[0]+`" src="`+get_img_src(player_url[worldcup_arr[0]])+`" onclick="worldcup_select(this)">
+      <h4>`+worldcup_arr[0]+`</h4>
+    </div>
+    <div>
+      <input class = "img_cell" type="image" value="`+worldcup_arr[1]+`" src="`+get_img_src(player_url[worldcup_arr[1]])+`" onclick="worldcup_select(this)">
+      <h4>`+worldcup_arr[1]+`</h4>
+    </div>
+    `;
 
-        $('.game-container.reflex').css({
-          'display' : 'grid',
-          'grid-template-columns' : '1fr 1fr'
-        });
-        $('.game-container.reflex').html(msg);
+    $('.game-item.worldcup').html(msg);
   }
+}
 
+function worldcup_select(res){
+
+  if(worldcup_round == 'FINAL'){
+    champion = res.value;
+    runner_up = get_runner_up(champion);
+    show_worldcup();
+  }else {
+    worldcup_selected.push(res.value);
+    worldcup_arr.splice(0,2);
+    worldcup_start();
+  }
+}
+function get_runner_up(item){
+  for(var i in worldcup_arr){
+    if(worldcup_arr[i] == item){
+      worldcup_arr.splice(i, 1);
+      break;
+    }
+  }
+  return worldcup_arr[0];
+}
+
+function worldcup_initialize(){
+  worldcup_arr = worldcup_selected;
+  worldcup_selected = [];
+  switch (worldcup_arr.length) {
+    case 16:
+      worldcup_round = 'ROUND OF 16';
+      break;
+    case 8:
+      worldcup_round = 'QUARTER FINAL';
+      break;
+    case 4:
+      worldcup_round = 'SEMI FIANL';
+      break;
+    case 2:
+      worldcup_round = 'FINAL';
+      break;
+  }
+  $('.game-item.desc').html(worldcup_round);
+  shuffle(worldcup_arr);
+  worldcup_start();
+}
+
+function show_worldcup(){
+  var msg =
+  `<div id="myProgress">
+    <div id="myBar"></div>
+  </div>
+  <h5 style="text-align:center">Wait for seconds .... </h5>
+  <form method = "POST" action = "`+url_host+`worldcup_df_process" id="myworldcup">
+    <input type = "hidden" name = "champion" value =`+champion+`>
+    <input type = "hidden" name = "runner_up" value =`+runner_up+`>
+  </form>`;
+  $('.game-item.worldcup').html(msg);
+  $('#myworldcup').submit();
+}
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ WHO AM EYE 후엠아이 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -283,7 +145,6 @@ var arr_shuffle;
 var whoameye_stage = 0;
 var whoameye_score = 0;
 
-const src_whoameye = src_host+"wp-content/uploads/whoameye/";
 const whoameye_final = 10;
 const set_time_whoameye = 10;
 
@@ -308,6 +169,7 @@ function whoameye_start(){
   SetTime = set_time_whoameye;
   whoameye_timerStart();
   whoameye_stage++;
+  $('.whoameye_stage').html('STAGE : '+whoameye_stage);
   // 눈깔 입력
   arr_shuffle = shuffle(whoameye_arr);
   whoameye_answer = Math.floor((Math.random()*16));
@@ -319,34 +181,28 @@ function whoameye_start(){
   }
 
   // 힌트입력
-
-  var msg = '<h2 class="time_left"> TIME LEFT : '+SetTime+'</h2> <img width = "90%" src = "'+src_whoameye+'hint/'+whoameye_ans[whoameye_stage-1]+'.png">';
+  var img_src = whoameye_hint[whoameye_ans[whoameye_stage-1]];
+  var msg = '<h3 class="time_left"> TIME LEFT : '+SetTime+'</h3> <img width = "90%" src = "'+get_img_src(img_src)+'">';
   $('.whoami-item.center').html(msg);
   $('.whoami-item.left').html(inner_1);
   $('.whoami-item.right').html(inner_2);
 
   // 스테이지 입력
-  //  document.querySelector('.stage').innerHTML = "stage : "+whoameye_stage+"/10";
   $('.stage').html( "stage : "+whoameye_stage+"/10");
-
 }
 function whoameye_timerStart(){ tid=setInterval('whoameye_time()',10) }
 function whoameye_time() {	// 1초씩 카운트
 
-//  document.querySelector('.time_left').innerHTML = 'TIME LEFT : <font color="red">'+ SetTime+'</font>';
-  $('.time_left').html('TIME LEFT : <font color="red">'+ SetTime+'</font>');
-//  var msg = "<h4>TIME LEFT :  <font color='red'>" + SetTime + " s </font> 입니다.</h4>";
-
-  //document.all.ViewTimer.innerHTML = msg;		// div 영역에 보여줌
+  $('.time_left').html('TIME LEFT : <font color="black">'+ SetTime+'</font>');
   SetTime = parseFloat(SetTime-0.01).toFixed(2)
   if (SetTime < 0) {			// 시간이 종료 되었으면..
     clearInterval(tid);		// 타이머 해제
     whoameye_check(null);
   }
 }
-
 function load_eye(num){
-  return '<img class = "img_eye" src= "'+src_whoameye+'eye/'+arr_shuffle[num]+'.png" onclick=\'whoameye_check("'+arr_shuffle[num]+'")\'>';
+  var img_src = whoameye_eye[arr_shuffle[num]];
+  return '<img class = "img_eye" src= "'+get_img_src(img_src)+'" onclick=\'whoameye_check("'+arr_shuffle[num]+'")\'>';
 }
 function shuffle(a) {
     var j, x, i;
@@ -358,7 +214,6 @@ function shuffle(a) {
     }
     return a;
 }
-
 function whoameye_check(res){
   clearInterval(tid);		// 타이머 해제
   var anwser_color;
@@ -370,31 +225,28 @@ function whoameye_check(res){
   }
   whoameye_result(anwser_color);
 }
-
 function whoameye_result(color){
-  $('.game-box').css('backgroundColor', color);
+  $('.game-item.whoameye').css('backgroundColor', color);
 //  document.querySelector('.game-box').style.backgroundColor = color;
   if(whoameye_stage<whoameye_final){
     setTimeout(function(){
-      $('.game-box').css('backgroundColor', '#efefef');
-      // document.querySelector('.game-box').style.backgroundColor = '#efefef';
+      $('.game-item.whoameye').css('backgroundColor', '#ffffff00');
        whoameye_start();
      }, 500);
   }else {
-    $('.game-box').css('backgroundColor', '#00000000');
     var msg=`
     <div id="myProgress">
       <div id="myBar"></div>
     </div>
     <h5 style="text-align:center">Wait for seconds .... </h5>
-    <form method = "POST" action = "`+url_host+`whoami_process" id="myscore">
+    <form method = "POST" action = "`+url_host+`whoameye_process" id="myscore">
       <input type = "hidden" name = "score" value =`+whoameye_score*whoameye_final+`>
     </form>
     `
     progress_move();
-
-    $('.game-box').html(msg);
-    $('.stage').css('display', 'none');
+    $('.game-item.whoameye').css('backgroundColor', '#ffffff00');
+    $('.main').html(msg);
+    $('.whoameye_stage').css('display', 'none');
     $("#myscore").submit();
   }
 }
@@ -410,162 +262,16 @@ function progress_move(){
             width++;
             per = width+'%';
             $('#myBar').css('width',per);
-//            elem.style.width = width + '%';
         }
     }
 }
 
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ FAST FIND 패스트파인드  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
-
-var fastfind_stage = 0;
-var grid_size = 3;
-
-var selected_team = [];
-var answer;
-var wrong;
-
-const src_fastfind = src_host+"wp-content/uploads/fastfind/";
-const set_time_fastfind = 20;
-
-// 팀선택
-
-function team_select(res){
-//  selected_team = JSON.parse(res.value);
-//  document.querySelector('.btn_start').style.display = 'inline';
-//  game_start();
-  var target = '.fastfind_start.'+res;
-  document.querySelector(target).click(); // Click on the checkbox
-}
-
-function team_setting(res){
-  selected_team = JSON.parse(res.value);
-  game_start();
-}
-
-// 패스트파인드 시작
-
-function game_start(){
-  SetTime = set_time_fastfind;
-  grid_size = 3+Math.floor(fastfind_stage/2);
-  fastfind_stage++;
-
-  answer = selected_team[Math.floor((Math.random()*15)+1)];
-  wrong = selected_team[Math.floor((Math.random()*15)+1)];
-
-  var i=0;
-  while(answer == wrong){
-    wrong = selected_team[Math.floor((Math.random()*15)+1)];
-  }
-  var ans_position = Math.floor(Math.random()*grid_size*grid_size);
-
-  var make_game = '<h2 class = "target_name" style= "text-align: center"></h2><div class = "game-container fastfind">';
-
-  while(i<grid_size*grid_size){
-    if(i == ans_position){
-      make_game = make_game +
-      '<img class = "img_cell" src="'+src_fastfind+selected_team[0]+'/'+answer+'.png" onclick=\'checkAnswer("'+answer+'")\'></img>';
-    }else {
-      make_game = make_game +
-      '<img class = "img_cell" src="'+src_fastfind+selected_team[0]+'/'+wrong+'.png" onclick=\'checkAnswer("'+wrong+'")\'></img>';
-    }
-    i++;
-  }
-  make_game = make_game + '</div><h5 class = "stage_showing" style="text-align: right; margin: 20px"></h5>';
-
-  //document.querySelector('.game-box.fastfind').innerHTML=make_game;
-  $('.game-box.fastfind').html(make_game);
-  $('.game-box.fastfind').css({
-    'border-radius' : '5px',
-    'background-color' : '#efefef',
-    'margin' : '0 auto',
-    'padding' : '20px'
-  });
-  $('.game-container.fastfind').css({
-    'grid-template-columns' : 'repeat('+grid_size+', 1fr)',
-    'max-width' : '450px'
-  });
-  $('.stage_showing').html('current stage  <font color = "red">'+fastfind_stage+'</font>');
-  fastfind_timerStart();
-}
-
-function fastfind_timerStart(){ tid=setInterval('fastfind_time()',10) }
-function fastfind_time() {	// 1초씩 카운트
-
-  $('.target_name').html('TIME LEFT <font color="red"> '+SetTime+'</font>');
-  //document.querySelector('.target_name').innerHTML = '<font color="red">'+SetTime+'</font>';
-  //'TIME LEFT : <font color="red">'+ SetTime+'</font>';
-  //  var msg = "<h4>TIME LEFT :  <font color='red'>" + SetTime + " s </font> 입니다.</h4>";
-
-  //document.all.ViewTimer.innerHTML = msg;		// div 영역에 보여줌
-  SetTime = parseFloat(SetTime-0.01).toFixed(2);
-  if (SetTime < 0) {			// 시간이 종료 되었으면..
-    clearInterval(tid);		// 타이머 해제
-    fastfind_finish();
-  }
-}
-
-function checkAnswer(res){
-
-  if(res != answer){
-    SetTime = parseFloat(SetTime-3).toFixed(2);
-    $('.game-box.fastfind').css("backgroundColor", 'red');
-    setTimeout(function(){
-      $('.game-box.fastfind').css("backgroundColor", '#efefef');
-    },300);
-
-} else {
-    clearInterval(tid);		// 타이머 해제
-    $('.game-box.fastfind').css("backgroundColor", '#51ff00');
-    setTimeout(function(){
-      game_start();
-      $('.game-box.fastfind').css("backgroundColor", '#efefef');
-    },300);
-  }
-}
-
-function fastfind_finish(){
-  if(fastfind_stage>30){
-    showing_msg = '<p>Your brain is simmilar to computer.</p>'
-  }else if (fastfind_stage > 20) {
-    showing_msg = '<p>You have eagle eye and very sharp sense !</p>'
-  }else if (fastfind_stage > 15) {
-    showing_msg = '<p>Great sense !</p>'
-  }else if (fastfind_stage > 10) {
-    showing_msg = '<p>Good job ! But you can be better ! try again</p>'
-  }else if (fastfind_stage > 5) {
-    showing_msg = '<p>Not bad ! But you need to be more sharp ! practice again</p>'
-  }else {
-    showing_msg = '<p>I think you didn\'t concentrated! </p>'
-  }
-
-  var msg =
-      '<img class = "img_cell" src = "'+src_host+'wp-content/uploads/inner_thumbnail/fastfind_result.png">'+
-      '<div style = "margin : 20px; border-top : 2px solid; padding-top: 10px"><h3>MY RESULT : <font color ="red">'
-      +fastfind_stage+'</font></h3><h6>'
-      +showing_msg+'</h6>'
-      +record_form('fastfind', fastfind_stage);
-
-  $('.target_name').css('display','none');
-  $('.stage_showing').css('display','none');
-  $('.game-box.fastfind').html(msg);
-  $('.game-box.fastfind').css({
-    'max-width' : '450px'
-  });
-//  document.querySelector('.game-container.fastfind').style = "display:inline-grid; align-items:center";
-//  document.querySelector('.game-container.fastfind').innerHTML='<h3>My record : </h3>'+stage-2;
-}
-
-function locate_fastfind(){
-  location.href = url_host+"fastfind";
-}
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ THREE TOP 쓰리톱  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 var tt_select={};
 var selected = [];
 var price = [];
 var extra_money;
-
 const threetop_budget = 10;
 
 function threetop_select(res){
@@ -578,7 +284,6 @@ function threetop_select(res){
 }
 function mylist_set(){
   var target = '.img_cell.mid.'+tt_select['name'];
-
   if(selected.includes(tt_select['name'])){
     // 이미 있으면 삭제
     remove_list(tt_select['name']);
@@ -607,6 +312,11 @@ function mylist_set(){
       }
     }
   }
+  if(selected.length == 3){
+    $('#btn_submit').css('display','inline');
+  }else {
+    $('#btn_submit').css('display','none');
+  }
   show_list();
 }
 
@@ -621,40 +331,31 @@ function remove_list(item){
 }
 
 function show_list(){
-
-
   var money_use = 0;
   for(var i=0; i<price.length; i++){
     money_use = money_use + parseInt(price[i]);
   }
   extra_money = threetop_budget - money_use;
-
-  $('.extra_money').html('Best Midfield Combination <font color="yellow">'+extra_money+'$</font>');
+  $('.extra_money').html('BEST MF COMBINATION  <font color="black">'+extra_money+' $</font>');
   document.getElementById('player_list').value = selected;
-  // document.querySelector('.extra_money').innerHTML = 'MY BUDGET LEFT <font color="red">'+extra_money+'$</font>'
 }
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ THREE TOP PROCESS 쓰리톱 프로세스  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
-var arr_mid;
+var arr_vote;
 var participant;
 var combi;
-
 const show_size = 6;
-const src_threemid = src_host+"wp-content/uploads/threemid/";
 
 function vote_category(res){
   vote_btn_css(res.id);
-  arr_mid = JSON.parse(res.value);
+  arr_vote = JSON.parse(res.value);
   show_vote('personal');
 }
-
 function vote_combi(res){
   vote_btn_css(res.id);
   combi = JSON.parse(res.value);
   show_vote('combi');
 }
-
 function vote_btn_css(src){
   var target = '#'+src;
   $('.vote-menu > button').css({
@@ -667,18 +368,16 @@ function vote_btn_css(src){
     'border' : '1.5px solid #D32F2F'
   });
 }
-
 function show_vote(res){
   participant = $('#total_participants').val();
   var msg ="";
   var percent;
   if(res == 'personal'){
     for(var i=0; i<show_size; i++){
-      percent = ((arr_mid[i]['vote']/participant)*100).toFixed(2)+"%";
-      msg = msg +`<div style = "display: grid; grid-template-columns : 1fr 4fr">`+
-      `<div style= "display: grid"><img src = "`+src_threemid+arr_mid[i]['name']+`.png"><h6>`+arr_mid[i]['name']+`</h6></div>`;
-      msg = msg + vote_msg_send(percent);
-
+      percent = ((arr_vote[i]['vote']/participant)*100).toFixed(2)+"%";
+      msg = msg +`<div style = "display: grid; grid-template-columns : 1fr 5fr">`+
+      `<div style= "display: grid"><img src = "`+get_img_src(player_url[arr_vote[i]['name']])+`"></div>`;
+      msg = msg + vote_msg_send(percent, arr_vote[i]['name']);
     }
   }
   else {
@@ -687,19 +386,18 @@ function show_vote(res){
       msg = msg +`<div style = "display: grid; grid-template-columns : 1fr 1fr 1fr 3fr">`;
       for(var j=0; j<combi[i]['combi'].length; j++){
         msg = msg + `<div style = "display: grid"><img src = "`
-        +src_threemid+combi[i]['combi'][j]
-        +`.png"><h6>`+combi[i]['combi'][j]
+        +get_img_src(player_url[combi[i]['combi'][j]])
+        +`"><h6 style="text-aling: center">`+combi[i]['combi'][j]
         +`</h6></div>`;
       }
-      msg = msg + vote_msg_send(percent);
+      msg = msg + vote_msg_send(percent,"");
     }
   }
-
-   $('.mid_category').html(msg);
+   $('.vote_result').html(msg);
 }
-
-function vote_msg_send(percent){
+function vote_msg_send(percent, name){
   var re = `<div style= "padding: 0 10px">
+              <h6>`+name+`</h6>
               <h6 style="text-align: left"><font color = "#E57373">   `+percent+`</font></h6>
               <div id="myVote"><div id="myVote_gauge" style = "width : `+percent+`"></div></div>
             </div></div>`
@@ -707,27 +405,15 @@ function vote_msg_send(percent){
 }
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ MY HERO 마이 히어로  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
-const src_myhero = src_host+"wp-content/uploads/myhero/";
 var hero_tal = {
-  'Technic' : 512,
-  'Strength' : 256,
-  'Shooting' : 128,
-  'Tackle' : 64,
-  'Passing' : 32,
-  'Leadership' : 16,
-  'Stamina' : 8,
-  'Speed' : 4,
-  'Heading' : 2,
-  'Dribble' : 1
+  'Technic' : 512,'Strength' : 256,'Shooting' : 128,'Tackle' : 64,'Passing' : 32,'Leadership' : 16,'Stamina' : 8,'Speed' : 4,'Heading' : 2,'Dribble' : 1
 };
 var selected_talent = [];
 var talent_list = [];
-
 var hero_code;
 var hero_progress;
 
-function myhero_initiailizing(){
+function myhero_init(){
   hero_code = 0;
   hero_progress = 0;
   myhero_set();
@@ -746,46 +432,44 @@ function myhero_set(){
       break;
   }
   $('.game-item.myhero').css({
-    'grid-template-columns' : '1fr 1fr 1fr',
+    'grid-template-columns' : '1fr 1fr',
     'display' : 'grid'
   });
 }
 function get_talent_vs(a,b){
-  var msg = get_hero_src(a)+'<h1 style = "margin: auto">VS</h1>'+get_hero_src(b);
-  $('.game-item.myhero').html(msg);
+  var msg = get_hero_src(a)+get_hero_src(b);
+  var desc = '<font color = "#D32F2F">'+a+'</font> VS <font color = "#D32F2F">' + b +'</font>';
+  $('.game-item.option').html(msg);
+  $('.game-item.desc').html(desc);
 }
-
 function get_hero_src(tal){
-  var hero_src = '<img class = "img_cell selector" src = "'+src_myhero+'talent/'+tal+'.png" onclick = "add_talent(\''+tal+'\')">';
+  var hero_src = '<img class = "img_cell selector" src = "'+get_img_src(talent_url[tal])+'" onclick = "add_talent(\''+tal+'\')">';
   return hero_src;
-}
 
+}
 function add_talent(res){
   talent_list.push(res);
   hero_code = hero_code + hero_tal[res];
   hero_progress++;
   myhero_set();
 }
-
 function get_talent_group(list){
-  var msg = '<h3 style = "text-align: center; margin: 2rem; font-weight: bold">SELECT <font color = "red">3 TALENTS </font></h5><div class = "game-item myhero">' ;
+  var msg = '<h1 class = "game-item desc">SELECT <font color = "black">3 TALENTS </font></h5><div class = "game-item option">' ;
   for(var i=0; i<list.length; i++){
-    msg = msg + '<img class = "img_cell selector hero" value = "'+list[i]+'" src = "'+src_myhero+'talent/'+list[i]+'.png" onclick = "add_talent_group(this,\''+list[i]+'\')">';
+    msg = msg + '<img class = "img_cell selector" value = "'+list[i]+'" src = "'+get_img_src(talent_url[list[i]])+'" onclick = "add_talent_group(this,\''+list[i]+'\')">';
   }
   msg = msg + '</div>'+
     `<form method = "POST" action = "`+url_host+`myhero_process" style = "width: fit-content; margin: 10px auto">
       <input class = "sending_tal" name = "talent" type = "hidden">
       <input class = "mycode" name = "code" type = "hidden">
-      <input style = "margin: 10px" type = "submit" value = "submit">
+      <input id = 'btn_submit' style = "margin: 10px" type = "submit" value = "submit">
     </form>
     `;
   $('.main').html(msg);
-  $('.game-item.myhero').css({
-    'grid-template-columns' : '1fr 1fr 1fr',
-    'display' : 'grid'
+  $('.game-item.option').css({
+    'grid-template-columns' : '1fr 1fr 1fr'
   });
 }
-
 function add_talent_group(res,talent){
   if(selected_talent.includes(talent)){
     hero_code = hero_code - hero_tal[talent];
@@ -808,11 +492,14 @@ function add_talent_group(res,talent){
       alert('Only 3 talent !')
     }
   }
-
   $('.mycode').val(hero_code);
   $('.sending_tal').val(talent_list.concat(selected_talent));
+  if(selected_talent.length == 3){
+    $('#btn_submit').css('display','inline');
+  }else {
+    $('#btn_submit').css('display','none');
+  }
 }
-
 function remove_hero(item){
   for(var i in selected_talent){
     if(selected_talent[i] == item){
@@ -821,24 +508,27 @@ function remove_hero(item){
     }
   }
 }
-
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ DREAM CLUB 드림클럽  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
 var selected_dream = [];
-var src_dreamclub = src_host+'wp-content/uploads/dreamclub/';
 
-function select_dream(res){
-  selected_dream.push(res);
+function dreamclub_init(){
+  selected_dream = [];
+  select_dream();
+}
 
+function select_dream(){
   switch (selected_dream.length) {
+    case 0:
+      set_dream("PARTY", "CLUB", "BIRTHDAY");
+      break;
     case 1:
-      set_dream("compact", "big", "CAR");
+      set_dream("COMPACT", "BIG", "CAR");
       break;
     case 2:
-      set_dream("maker", "handmade", "SHOES");
+      set_dream("BRAND", "HANDMADE", "SHOES");
       break;
     case 3:
-      set_vacation("athens", "newyork", "dubai", "bangkok","VACATION");
+      set_vacation("ATHENS", "NEWYORK", "DUBAI", "BANGKOK","VACATION");
       break;
     case 4:
       show_dream();
@@ -848,25 +538,29 @@ function select_dream(res){
 
 function set_dream(a,b,c){
   var msg = `
-    <img class="img_cell selector dream" src ="`+src_dreamclub+a+`.png" onclick = "select_dream('`+a+`')">
-    <img class="img_cell selector dream" src ="`+src_dreamclub+b+`.png" onclick = "select_dream('`+b+`')">
+    <img class="img_cell selector" src ="`+get_img_src(dream_url[a])+`" onclick = "push_dream('`+a+`')">
+    <img class="img_cell selector" src ="`+get_img_src(dream_url[b])+`" onclick = "push_dream('`+b+`')">
   `;
-  $('.game-item.dreamclub').html(msg);
-  $('.dream_category').html(c);
+  $('.game-item.option').html(msg);
+  $('.game-item.desc').html(c);
 }
 function set_vacation(a,b,c,d,e){
   var msg = `
-    <img class="img_cell selector dream" src ="`+src_dreamclub+a+`.png" onclick = "select_dream('`+a+`')">
-    <img class="img_cell selector dream" src ="`+src_dreamclub+b+`.png" onclick = "select_dream('`+b+`')">
-    <img class="img_cell selector dream" src ="`+src_dreamclub+c+`.png" onclick = "select_dream('`+c+`')">
-    <img class="img_cell selector dream" src ="`+src_dreamclub+d+`.png" onclick = "select_dream('`+d+`')">
+    <img class="img_cell selector dream" src ="`+get_img_src(dream_url[a])+`" onclick = "push_dream('`+a+`')">
+    <img class="img_cell selector dream" src ="`+get_img_src(dream_url[b])+`" onclick = "push_dream('`+b+`')">
+    <img class="img_cell selector dream" src ="`+get_img_src(dream_url[c])+`" onclick = "push_dream('`+c+`')">
+    <img class="img_cell selector dream" src ="`+get_img_src(dream_url[d])+`" onclick = "push_dream('`+d+`')">
   `;
-  $('.dream_category').html(e);
-  $('.game-item.dreamclub').html(msg);
+  $('.game-item.desc').html(e);
+  $('.game-item.option').html(msg);
+}
+
+function push_dream(res){
+  selected_dream.push(res);
+  select_dream();
 }
 
 function show_dream(){
-
   var msg=`
   <div id="myProgress">
     <div id="myBar"></div>
@@ -877,48 +571,15 @@ function show_dream(){
   </form>
   `
   progress_move();
-  $('.game-item.dreamclub').html(msg);
+  $('.game-item.option').html(msg);
   $("#mydream").submit();
 }
 
+// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 월드컵 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ RANDOM BOX 랜덤 박스  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
-var random_list;
-var arr_ran = [];
-
-const src_randombox = src_host+'wp-content/uploads/randombox/';
-
-function randombox(list){
-  random_list = JSON.parse(list.value);
-  arr_ran = [];
-  select_random();
+function load_img_src(res){
+  var src = "https://gdurl.com/"+res;
+  return src;
 }
 
-function select_random(){
-  for(var i=0; i<3; i++){
-    var temp = Math.floor((Math.random()*random_list.length));
-    while (arr_ran.includes(random_list[temp])) {
-      var temp = Math.floor((Math.random()*random_list.length));
-    }
-    arr_ran.push(random_list[temp]);
-  }
-
-  randombox_showing();
-}
-
-function randombox_showing(){
-  var msg = '<h1 class = "h1_design">MY RANDOM 3 TOP</h1><div class="game-container random">';
-  for(var i in arr_ran){
-    msg = msg + '<img class = "random-item" src = "'+src_randombox+arr_ran[i]+'.png">';
-  }
-  msg = msg+'</div><input type="button" value = "REGAME" onclick="reset_random();">'
-  // document.querySelector('.game-box.threetop').innerHTML = msg;
-  $('.game-box.threetop').html(msg);
-}
-
-function reset_random(){
-  arr_ran = [];
-  var msg = '<h1 class ="h1_design">MY RANDOM 3 TOP</h1><div class="game-container normal"><input class="game-item random"type="image"  src="http://localhost:81/wordpress/wp-content/uploads/icon/push_button.png" onclick="select_random();"><h4 style="margin: auto">Click button and get your player !</h4></div>';
-  $('.game-box.threetop').html(msg);
-}
+// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ IMGA CODE ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■

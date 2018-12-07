@@ -1,100 +1,67 @@
 <?php
-      $desc_doppy = 'YOUR DOPPLEGANGER ?';
-      $desc_myhero = 'WHO IS YOUR FOOTBALL HERO ?';
-      $desc_whoameye = 'GUESS PLAYERS WITH ONLY EYES';
-      $desc_threemid = 'MAKE YOUR BEST 3 MF LINE';
-      $desc_fastfind = 'HOW SHARP ARE YOUR EYES ?';
-      $desc_style = 'MOST SIMILAR PLAYER TO ME';
-      $desc_reflex = 'HOW FAST ? REFLEX TEXT !';
-      $desc_dreamclub = 'WHRE IS YOUR DREAM CLUB ?';
-
+       $arr_desc = array(
+        'doppy'=>'YOUR DOPPLEGANGER ?',
+        'myhero'=>'WHO IS YOUR FOOTBALL HERO ?',
+        'whoameye'=>'GUESS PLAYERS WITH ONLY EYES',
+        'threemid'=>'MAKE YOUR BEST 3 MF LINE',
+        'dreamclub'=>'WHRE IS YOUR DREAM CLUB ?',
+        'worldcup_df'=>'YOUR FAVORITE CENTER BACK !'
+      );
   function sql_connect(){
-  //  $conn = mysqli_connect("localhost", "shupa13", "tivjakfl5@", "shupa13");
-    $conn = mysqli_connect("localhost:3307", "root", "tivjakfl5", "opentutorials");
+    $conn = mysqli_connect("localhost", "shupa13", "tivjakfl5@", "shupa13");
+  //  $conn = mysqli_connect("localhost:3307", "root", "tivjakfl5", "opentutorials");
     return $conn;
   }
 
 
-    function return_src(){
-      $src = "https://shupa13.cafe24.com/";
+    function return_src($res){
+      $src = "https://i.imgur.com/".$res.'.png';
       $local = "http://localhost:81/wordpress/";
-      return $local;
+      return $src;
     }
 
     function return_url(){
       $url = "http://footballdor.com/";
       $local = "http://localhost:81/wordpress/";
-      return $local;
+      return $url;
     }
 
     function load_game($game, $desc){
+      require('code/thumb.php');
+      $src = 'https://i.imgur.com/'.$arr_thumb[$game].'.png';
     	$ss = '
     	<a href="'.$game.'">
-    		<img class="game-thumbnail" style="" src= "'.return_src().'wp-content/uploads/thumbnail_games/'.$game.'.png"></img>
+    		<img class="game-thumbnail" style="" src= "'.$src.'"></img>
         <div>'.$desc.'</div>
     	</a>';
       return $ss;
+    }
+
+    function img_src($game){
+      $src = 'https://fdurl.com/'.$game.'_main';
     }
 
     function call_nav(){
 
       echo '
       <div class="nav">
-        <div class="game-item">'.load_game("doppy", "").'</div>
-        <div class="game-item">'.load_game("myhero", "").'</div>
-        <div class="game-item">'.load_game("whoameye", "").'</div>
-        <div class="game-item">'.load_game("fastfind", "").'</div>
         <div class="game-item">'.load_game("threemid", "").'</div>
-        <div class="game-item">'.load_game("style", "").'</div>
-        <div class="game-item">'.load_game("reflex", "").'</div>
+        <div class="game-item">'.load_game("worldcup_df", "").'</div>
+        <div class="game-item">'.load_game("myhero", "").'</div>
         <div class="game-item">'.load_game("dreamclub", "").'</div>
+        <div class="game-item">'.load_game("whoameye", "").'</div>
+        <div class="game-item">'.load_game("doppy", "").'</div>
       </div>
       ';
     }
 
-  function menuList()
-  {
-    $files = scandir('menu/');
-    $list = array();
+    function call_ad(){
+      $AD =  '
+        	<div class="aside">
+          </div>';
 
-    for($i=0; $i<count($files); $i++){
-      if($files[$i]!='.'){
-        if($files[$i]!='..'){
-          array_push($list, $files[$i]);
-        }
-      }
+      return $AD;
     }
-    for($j=0; $j<count($list); $j++){
-       ?><a class = "playerList" href="home.php?id=<?php echo $list[$j]?>"><?php echo $list[$j]?></a><?php
-    }
-  }
-
-  function description(){
-    if(isset($_GET['id'])){
-    echo file_get_contents('menu/'.$_GET['id']);
-  }else {
-    echo '환영합니다';
-    }
-  }
-
-  function naming(){
-    if(isset($_GET['id'])){
-    print htmlspecialchars($_GET['id']);
-  }else {
-    echo 'HOME MAIN PAGE 입니다.';
-    }
-  }
-
-  function imgLoad(){
-    if(isset($_GET['id'])){
-    echo 'image/'.$_GET['id'].'.jpg';
-  }else {
-    echo 'image/LIVERPOOL.jpg';
-    }
-  }
-  function imgLoad_player($name){
-    echo 'http://localhost:81/wordpress/wp-content/uploads/img_player/'.$name.'.png';
-  }
 
   // My play styles
 
@@ -107,13 +74,5 @@
   $row = mysqli_fetch_array($result);
   return $row;
 }
-
-// 스타일에서 포지션 구하는 함수로 삭제해도 될듯 ?
-  function getPostion($position){
-    echo "http://localhost:81/wordpress/wp-content/uploads/position_icon/".$position.".png";
-  }
-
-
-
 
  ?>

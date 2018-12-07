@@ -12,6 +12,7 @@
 
 get_header(); ?>
 <?php require('lib/print.php'); ?>
+<?php require('lib/code/thumb.php'); ?>
 <?php $conn = sql_connect(); ?>
 <?php
   $sql = '
@@ -22,18 +23,22 @@ get_header(); ?>
     array_push($arr, $row['name']);
   }
  ?>
-
-<article class = "game-box">
-  <div class="game-container whoameye">
-    <div class="whoami-item left"></div>
-    <div class="whoami-item center">
-      <img src = <?= return_src() ?>wp-content/uploads/inner_thumbnail/whoameye.png style = "margin : 10px">
-      <button type="button" value=<?= json_encode($arr); ?> onclick="whoameye_set(this);">GAME START</button>
+<div class="container game">
+	<?php call_nav() ?>
+	<div class="main">
+    <div class="game-item whoameye">
+      <div class="whoami-item left"></div>
+      <div class="whoami-item center">
+        <img src =<?= return_src($arr_thumb_inr['whoameye']) ?> class="thumbnail">
+        <button type="button" value=<?= json_encode($arr); ?> onclick="whoameye_set(this);">GAME START</button>
+      </div>
+      <div class="whoami-item right"></div>
     </div>
-    <div class="whoami-item right"></div>
-  </div>
-</article>
-<h5 style= "text-align: right" class="stage"></h5>
+    <h4 class="whoameye_stage"></h4>
+	</div>
+  <?= call_ad(); ?>
+
+</div>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

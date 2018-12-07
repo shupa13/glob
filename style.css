@@ -51,10 +51,43 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans|Fjalla+One|Oswald:700');
 @import url('https://fonts.googleapis.com/css?family=Abel|Archivo+Narrow|Black+Han+Sans|Fjalla+One|Oswald:700|Teko');
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 공통 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+@media screen and (min-width: 900px) {
+  h3.selected{
+    padding: 15px;
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 899px) {
+  h3.selected{
+    padding: 10px;
+    font-size: 1.5rem;
+  }
+}
+
+h3.selected{
+  font-family: 'Oswald', sans-serif;
+  border-bottom: 7px solid;
+  width: fit-content;
+  margin: 10px 0 10px auto;
+  color: #D32F2F;
+}
+
+#btn_submit{
+  display: none;
+}
+
+a{
+  outline: none;
+}
+
+img.thumbnail{
+  width: 100%;
+  margin: auto;
+  padding: 0 20px;
+}
 
 .img_cell{
   outline: none;
-  border-radius: 5px;
   margin: auto;
 }
 .img_cell.selector{
@@ -62,6 +95,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
   -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
   filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
   opacity: 0.75;
+  width: 100%;
 }
 .img_cell.selector:hover{
   cursor: pointer;
@@ -70,27 +104,94 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
   background-color: #00000000;
   opacity: 1;
 }
+
+.sns_share{
+  display: flex;
+}
 .the_champ_sharing_container{
   width: fit-content;
-  margin: 10px 0;
-  font-family: 'Teko', sans-serif;
+}
+ul.the_champ_sharing_ul{
 
+  margin-top: 0;
 }
-.the_champ_sharing_container::before{
-  content : "Share with friends";
+i.theChampSharing{
+  margin: 0;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  background-size: cover;
 }
-.the_champ_horizontal_sharing .theChampSharing{
-  margin: 1px;
+ul.the_champ_sharing_ul li.theChampSharingRound{
+  margin-left: 2px !important;
 }
+
+.korea-sns-shortcode{
+  width: fit-content;
+  margin: 1px 0;
+}
+.korea-sns-shortcode > div{
+  margin: 0 0 0 2px;
+}
+
 @media screen and (max-width: 899px) {
-  .the_champ_sharing_container::before{
+  .the_champ_sharing_container:after{
     font-size: 1.2rem;
   }
 }
 @media screen and (min-width: 900px) {
-  .the_champ_sharing_container::before{
+  .the_champ_sharing_container:after{
     font-size: 1.7rem;
   }
+}
+
+.game-item.res{
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.game-item.res > div{
+  display: flex;
+  flex-direction: column;
+  padding: 30px 0;
+  margin: 10px 0;
+  width: fit-content;
+}
+.game-item.res > div > h1{
+  margin: auto 0;
+  width: fit-content;
+  padding-bottom: 10px;
+  border-bottom: 5px solid #D32F2F;
+  color: #D32F2F;
+  font-family: 'Oswald', sans-serif;
+}
+.game-item.res > img{
+  width: 100%;
+  margin: auto;
+}
+
+@media screen and (max-width: 899px) {
+  .game-item.res > div > h1{
+    font-size: 1.5rem;
+  }
+}
+@media screen and (min-width: 900px) {
+  .game-item.res > div > h1{
+    font-size: 2.3rem;
+  }
+}
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 컨택트 CONTACT ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+.contact_form > h1{
+  padding-bottom: 10px;
+  border-bottom: 5px solid #D32F2F;
+  color: #D32F2F;
+}
+.contact_form > img{
+  padding: 30px 0;
 }
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Progress bar ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
@@ -142,67 +243,193 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 }
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ MY HERO ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
+.img_eye:hover{
+  cursor: pointer;
+}
+
+.whoameye_stage{
+  font-family: 'Oswald', sans-serif;
+  padding-bottom: 5px;
+  margin: 10px 0 0 auto;
+  font-weight: 600;
+  border-bottom: 3px solid #D32F2F;
+  color: #D32F2F;
+  width: fit-content;
+}
+.whoami-item.center{
+  text-align: center;
+}
+.whoami-item.left,
+.whoami-item.right{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+}
+.whoami-item.left > img,
+.whoami-item.right > img{
+  margin-bottom: 1px;
+  border-radius: 3px;
+}
+
+.game-item.whoameye{
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  padding: 8px;
+  border-radius: 5px;
+}
+.time_left{
+  font-family: 'Oswald', sans-serif;
+  padding-bottom: 5px;
+  margin: 0 auto 5px;
+  font-weight: 600;
+  display: inline-flex;
+  color: #D32F2F;
+}
+
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ MY HERO ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 .game-item.myhero > h1{
   font-size: 3rem;
 }
+.result.myhero{
+  display: -webkit-inline-box;
+  margin-top: 20px;
+}
+.result.myhero > img{
+  max-width: 180px;
+  height: auto;
+  margin: 0 0 auto 0;
+}
+.result.myhero > div{
+  flex-grow: 1;
+  margin: 0 5px auto 0;
 
+}
+.result.myhero > div > h1{
+  width: fit-content;
+  padding-bottom: 10px;
+  font-family: 'Oswald', sans-serif;
+  color: #D32F2F;
+  margin: 0 10px;
+  border-bottom: 5px solid #D32F2F;
+}
+.result.myhero > div > ul{
+  padding-left: 20px;
+  margin: 10px;
+}
+.result.myhero > div > ul > li{
+  margin-bottom: 5px;
+}
+@media screen and (max-width: 899px) {
+  .result.myhero > div > h1{
+    font-size: 1.6rem;
+  }
+}
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 월드컵 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
+.game-item.worldcup{
+  margin: 0 auto;
+  display: flex;
+}
+.game-item.worldcup > div > input[type="image"]{
+  max-width: 100%;
+  height: auto;
+}
+
+.game-item.worldcup > button[type="button"]{
+  margin: 20px auto;
+  font-family: 'Oswald', sans-serif;
+}
+
+.game-item.worldcup > div > h4{
+  margin: auto;
+  padding: 5px 0;
+  font-family: 'Oswald', sans-serif;
+  border-bottom: 4px solid #D32F2F;
+  width: fit-content;
+}
+.game-item.worldcup_res{
+  display: flex;
+}
+.game-item.worldcup_res > div{
+  flex-grow: 1;
+  padding-left: 15px;
+  position: relative;
+}
+.game-item.worldcup_res > div > .the_champ_sharing_container{
+  position: absolute;
+  bottom: 0;
+}
+.game-item.worldcup_res > div > h2{
+  font-family: 'Oswald', sans-serif;
+  color: #D32F2F;
+  padding-bottom: 5px;
+  border-bottom: 3px solid #D32F2F;
+  width: fit-content;
+}
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 드림클럽 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
-.game-item.dreamclub{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 80%;
-  margin: 0 auto;
-}
 .img_cell.dream{
   padding: 5px;
 }
-.dream_category{
-  padding: 15px;
-  background-color: #343434;
-  color: white;
-  text-align: center;
-  border-radius: 5px;
+.game-item.option{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: fit-content;
   margin: 0 auto;
-  width: 80%;
+}
+.game-item.option > img{
+  max-width: 230px;
+  margin: 0;
+}
+.game-item.desc{
+  padding-bottom: 10px;
+  color: #D32F2F;
+  text-align: center;
+  margin: 0 auto 5px;
+  font-size: 1.7rem;
+  font-family: 'Oswald', sans-serif;
+  border-bottom: 3px solid #D32F2F;
 }
 
 
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 쓰리미드 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
-.mid_category > div > div > h6{
-  text-align: center;
+.vote_result > div > div > h6{
   margin: 3px 0;
 }
 @media screen and (min-width: 900px) {
-  .mid_category > div > div > h6{
+  .vote_result > div > div > h6{
     font-size: 1.6rem;
   }
   .extra_money{
-    padding: 20px;
+    padding: 15px;
+    font-size: 2.5rem;
   }
   #myVote_gauge{
     height: 3rem;
   }
 }
 @media screen and (max-width: 899px) {
-  .mid_category > div > div > h6{
+  .vote_result > div > div > h6{
     font-size: 1.1rem;
   }
   .extra_money{
     padding: 10px;
+    font-size: 1.6rem;
   }
   #myVote_gauge{
     height: 2rem;
   }
 }
 .extra_money{
+  color: #D32F2F;
+  margin: 10px 0 10px auto;
   text-align: center;
-  color: white;
-  background-color: #343434;
-  border-radius: 5px;
-  margin: 10px 0;
+  font-family: 'Oswald', sans-serif;
+  border-bottom: 7px solid;
+  width: fit-content;
 }
 .game-item.threemid{
   display: grid;
@@ -247,17 +474,19 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 }
 
 .game-item.threemid-res{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  margin: auto;
 }
 
 
 .vote-menu{
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
   margin: 15px 0;
 }
 .vote-menu > button[type="button"]{
+  flex-grow: 1;
+  width: auto;
+  border-color: white;
   background-color: #D32F2F;
   display: grid;
   padding: 10px 0;
@@ -278,7 +507,6 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
     }
 }
 .vote-menu > button[type="button"]:hover{
-  background-color: #ababab;
   cursor: pointer;
   color: #343434;
 }
@@ -358,6 +586,15 @@ form > p{
   .main{
     margin-top: 0;
   }
+  .current_page_item{
+    border-bottom: 3px solid #D32F2F;
+  }
+  .current_page_item > a{
+    color: #D32F2F !important;
+  }
+  .contact_form{
+    display: none;
+  }
 }
 @media screen and (min-width: 900px){
   .site-title{
@@ -381,12 +618,36 @@ form > p{
   .main{
     margin-top: 20px;
   }
+
 }
 
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 홈 화면 구성 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 #content{
 	display: flex;
   flex-direction: column;
+}
+
+.site-info > div > a{
+  display: flex;
+  margin: auto;
+  text-decoration: none;
+}
+.site-info > div > a > h5{
+  text-align: left;
+  color: white;
+  margin-left: 10px;
+}
+.site-info > div > a > img{
+  width: 25px;
+  height: 100%;
+}
+.site-info > div{
+  display: flex;
+}
+
+.site-info > div > img{
+  width: 150px;
+  height: 100%;
 }
 
 .container.game{
@@ -414,6 +675,7 @@ form > p{
 .game-item > a > div{
   font-weight: 400;
   font-family: 'Teko', sans-serif;
+  padding-left: 10px;
 }
 .site-logo{
   width: 250px;
@@ -428,7 +690,6 @@ form > p{
   letter-spacing: 1;
   border: none;
   margin-right: 58px;
-  border-top: 1px solid #efefef;
   border-bottom: 1px solid #efefef;
 /*
   border-bottom: 2px solid #343434;
@@ -459,22 +720,14 @@ form > p{
 }
 
 .mobile-navigation > div > ul > li {
-  padding: 3px 10px;
+  padding: 5px 10px;
 }
 .mobile-navigation > div > ul > li > a{
   text-decoration: none;
-  font-family: 'Fjalla One', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-weight: 400;
   color: #EF9A9A;
 }
-
-.current_page_item{
-  border-bottom: 3px solid #D32F2F;
-}
-.current_page_item > a{
-  color: #D32F2F !important;
-}
-
 
 html {
   font-family: sans-serif;
@@ -687,7 +940,7 @@ h3 {
   font-size: 1.5rem;
 }
 h4 {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 h5 {
   font-size: 1.1rem;
@@ -1378,7 +1631,7 @@ input[type="submit"] {
   border: 1px solid;
   border-color: #fa4c2a;
   border-radius: 3px;
-  background: #fa4c2a;
+  background-color: #D32F2F;
   box-shadow: none;
   color: #fff;
   font-size: 13.6px;
@@ -1386,7 +1639,7 @@ input[type="submit"] {
   padding: 13px 20px;
   cursor: pointer;
   text-shadow: none;
-  width: 100%;
+  width: fit-content;
   text-transform: uppercase;
 }
 button:hover,
@@ -1419,7 +1672,7 @@ textarea {
   background: #fff;
   font-size: 14px;
   margin: 0;
-  width: 100%;
+  width: fit-content;
 }
 input[type="text"]:focus,
 input[type="email"]:focus,
@@ -1459,7 +1712,7 @@ a:visited {
 /*  color: #494949; */
 }
 a:hover, a:focus, a:active {
-  color: #fa4c2a;
+  color: #D32F2F;
 }
 a:focus {
   outline: thin dotted;
@@ -1471,11 +1724,9 @@ a:hover, a:active {
 ## Menus
 --------------------------------------------------------------*/
 .navigation-wrapper.nav-layout-fullwidth {
-  background: #000000;
 }
 @media (min-width: 768px) {
   .breaking_wrapper.breaking-layout-fullwidth {
-    border-bottom: 1px solid #e6e6e6;
   }
   .breaking_wrapper.breaking-layout-fullwidth .header-breaking {
     padding-left: 0px;
@@ -1492,8 +1743,12 @@ a:hover, a:active {
   }
 }
 .navigation-wrapper .navigation-search-wrapper {
-  background: #000;
   position: relative;
+}
+@media (min-width: 900px) {
+  .navigation-wrapper .navigation-search-wrapper {
+    border-bottom: 3px solid #D32F2F;
+  }
 }
 .main-navigation {
   display: block;
@@ -1545,6 +1800,9 @@ a:hover, a:active {
 .main-navigation ul ul li:hover > ul, .main-navigation ul ul li.focus > ul {
   left: 100%;
 }
+.main-navigation > div > ul > li:hover{
+  background-color: #D32F2F;
+}
 .main-navigation ul ul li:last-child {
   border-bottom: none;
 }
@@ -1588,7 +1846,7 @@ a:hover, a:active {
   position: relative;
 }
 .main-navigation li:hover > a, .main-navigation li.focus > a {
-  background: #fa4c2a;
+  background: #D32F2F;
 }
 @media (max-width: 899px) {
   .main-navigation li {
@@ -1608,7 +1866,7 @@ a:hover, a:active {
   font-size: 15px;
   font-weight: 700;
   padding: 15px 22px;
-  color: #fff;
+  color: #EF9A9A;
   text-transform: uppercase;
 }
 @media (max-width: 899px) {
@@ -1619,12 +1877,13 @@ a:hover, a:active {
 .main-navigation a:hover {
   text-decoration: none;
   color: #fff;
-  background-color: #fa4c2a;
+  background-color: #D32F2F;
 }
 .main-navigation .current_page_item > a,
 .main-navigation .current-menu-item > a,
 .main-navigation .current_page_ancestor > a {
-  color: #fa4c2a;
+  color: white;
+  background-color: #D32F2F !important;
 }
 /* header mobie menu */
 .st-menu {
@@ -1845,11 +2104,11 @@ a:hover, a:active {
 }
 .social-links ul a:hover {
   background: transparent;
-  color: #fa4c2a;
+  color: #D32F2F;
   text-decoration: none;
 }
 .social-links ul a:hover::before {
-  color: #fa4c2a;
+  color: #D32F2F;
   -webkit-transition: 0.2s all ease-in-out;
   transition: 0.2s all ease-in-out;
 }
@@ -1951,7 +2210,7 @@ a:hover, a:active {
   border-radius: 3px;
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
   clip: auto !important;
-  color: #fa4c2a;
+  color: #D32F2F;
   display: block;
   font-size: 14px;
   font-size: 0.875rem;
@@ -2184,8 +2443,8 @@ a:hover, a:active {
   padding: 2px 10px 3px;
 }
 .widget_tag_cloud a:hover {
-  border-color: #fa4c2a;
-  color: #fa4c2a;
+  border-color: #D32F2F;
+  color: #D32F2Ff;
   text-decoration: none;
 }
 .widget_calendar {
@@ -2518,6 +2777,7 @@ a:hover, a:active {
   margin: 10px auto;
   padding: 0 40px;
   clear: both;
+  width: 100%;
 }
 @media (max-width: 899px) {
   .container {
@@ -2717,7 +2977,7 @@ a:hover, a:active {
   text-decoration: none;
 }
 .header-breaking .trending_slider_wrapper .entry-breaking a:hover {
-  color: #fa4c2a;
+  color: #D32F2F;
 }
 /* Home post layout */
 .post-grid {
@@ -2932,7 +3192,7 @@ a:hover, a:active {
   color: rgba(255, 255, 255, 0.9);
 }
 .footer-widgets .widget a:hover {
-  color: #fa4c2a;
+  color: #D32F2F;
 }
 .footer-widgets .widget li {
   border: none;
@@ -3088,7 +3348,7 @@ h2.entry-title a {
   text-decoration: none;
 }
 h2.entry-title a:hover {
-  color: #fa4c2a;
+  color: #D32F2Ff;
 }
 .entry-meta {
   display: block;
@@ -3376,7 +3636,7 @@ object {
 .site-content img,
 .site-footer img {
   /*opacity: 0; */
-  transition: all 0.6s linear;
+  /*transition: all 0.6s linear; */
 }
 .post-grid .featured-image.inview img,
 .post-grid .featured-image img.inview,
@@ -3487,7 +3747,7 @@ object {
   z-index: 10;
 }
 .slick-arrow:hover {
-  border-color: #fa4c2a;
+  border-color: #D32F2F;
 }
 .carousel-prev.slick-arrow {
   right: 27px;

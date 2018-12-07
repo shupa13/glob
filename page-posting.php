@@ -13,10 +13,8 @@
 get_header(); ?>
 <?php require('lib/print.php'); ?>
 <?php $conn = sql_connect(); ?>
-
-<?php while ( have_posts() ) : the_post(); ?>
-	<?php get_template_part( 'content', 'page' ); ?>
-<?php endwhile; ?>
-
+<div style="max-width: 1120px; width: 100%; margin: auto">
+	<?php echo do_shortcode('[instagram-feed num=16 cols=4 buttontext="More Posting" followtext="Follow _football_dor"]'); ?>
+</div>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

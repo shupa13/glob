@@ -11,6 +11,7 @@
  */
 get_header(); ?>
 <?php require('lib/print.php'); ?>
+<?php require('lib/code/player.php'); ?>
 <?php $conn = sql_connect(); ?>
 
 <?php
@@ -25,28 +26,32 @@ get_header(); ?>
   	<?php call_nav() ?>
 
   	<div class="main">
-      <div style="display: flex">
-        <img style="max-width: 180px; height: auto" class = "img_cell" src=<?= return_src() ?>wp-content/uploads/myhero/player/<?= $row['name'] ?>.png>
-        <div style="flex-grow: 1; padding: 5px; margin: auto">
-          <h4 style="font-weight: bold"><?= $row['name'] ?></h4>
+      <div class="result myhero">
+        <?php $src = $arr_myhero[$row['name']] ?>
+        <img class = "img_cell" src=<?= return_src($src) ?>>
+        <div>
+          <h1><?= $row['name'] ?></h1>
+          <ul>
           <?php
             for($i=0; $i<count($talent); $i++){
               echo '
-              <div style="margin : 10px">
-                <img width = "5%" src="'.return_src().'wp-content/uploads/icon/check.png">
-                <h5 style="display : inline; margin-left : 5px">'.$talent[$i].'</h5>
-              </div>
+              <li>
+                <h3 style="display : inline; margin-left : 5px">'.$talent[$i].'</h3>
+              </li>
               ';
             }
            ?>
+         </ul>
         </div>
       </div>
-      <?php echo do_shortcode('[TheChamp-Sharing url="https://www.naver.com" style=""]') ?>
+      <div class = "sns_share">
+        <?php echo do_shortcode('[korea_sns_pro_button link="http://footballdor.com/myhero" title="WHO IS MY HERO ?"]') ?>
+        <?php echo do_shortcode('[TheChamp-Sharing url="http://footballdor.com/myhero" style=""]') ?>
+      </div>
   	</div>
 
-  	<div class="aside">
-  		AD
-  	</div>
+    <?= call_ad(); ?>
+
   </div>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

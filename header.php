@@ -14,11 +14,10 @@ $primary_nav_layout = get_theme_mod( 'glob_nav_layout', 'boxed' );
 <html <?php language_attributes(); ?>>
 <head>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="http://localhost:81/wordpress/wp-content/themes/glob/funcs.js"></script>
 	<script src="http://shupa13.cafe24.com/wp-content/themes/glob/funcs.js"></script>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen">.
+	<link rel="stylesheet" type="text/css" href="http://shupa13.cafe24.com/wp-content/themes/glob/style.css" media="screen">.
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 <?php wp_head(); ?>
 </head>

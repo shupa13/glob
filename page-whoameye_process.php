@@ -11,17 +11,27 @@
  */
 get_header(); ?>
 <?php require('lib/print.php'); ?>
+<?php require('lib/code/thumb.php'); ?>
 <?php $conn = sql_connect(); ?>
 <?php $score = $_POST['score']; ?>
 
-<article class="game-box" style="max-width : 500px; margin: auto">
-  <img class = "img_cell" src = <?= return_src() ?>wp-content/uploads/inner_thumbnail/whoameye.png>
-  <div style = "margin : 20px; border-top : 2px solid">
-    <h3>MY SCORE : <font color = "red"; size = 40px><?= $score ?></font></h3>
-    <h6><?php echo get_msg($score); ?></h6>
-    <?php echo do_shortcode('[TheChamp-Sharing url="https://www.naver.com" style=""]') ?>
-  </div>
-</article>
+<div class="container game">
+  <?php call_nav() ?>
+	<div class="main">
+    <div class="game-item res">
+      <img class = "img_cell" style="max-width: 450px; margin: 0" src = <?= return_src($arr_thumb_inr['whoameye']) ?>>
+      <div>
+        <?php echo get_msg($score); ?>
+        <div class = "sns_share">
+          <?php echo do_shortcode('[korea_sns_pro_button link="http://footballdor.com/whoameye" title="WHO AM EYE ? LET ME GUESS"]') ?>
+          <?php echo do_shortcode('[TheChamp-Sharing url="http://footballdor.com/whoameye" style=""]') ?>
+        </div>
+      </div>
+    </div>
+	</div>
+  <?= call_ad(); ?>
+
+</div>
 
 
 <?php
@@ -29,19 +39,19 @@ get_header(); ?>
      $msg;
      switch($score){
        case 0 :
-         $msg = 'You need to love football more';
+         $msg = '<h1>JUNIOR</h1><h2>Don\'t worry you are just beginner. you can be better</h2>';
          break;
        case 10 : case 20 : case 30 : case 40 :
-         $msg = 'Don\'t worry you could be professional fan of football';
+         $msg = '<h1>AMATUER</h1><h2>Not bad. but you can be better if you love football steadily</h2>';
          break;
        case 50 : case 60 : case 70 :
-         $msg = 'You absolutely love football and your knowledge of football is high enough';
+         $msg = '<h1>SEMI PRO</h1><h2>You are passionate fan. you definitely love football</h2>';
          break;
        case 80 : case 90 :
-         $msg = 'Are you working about football ? I think you are Expert of football';
+         $msg = '<h1>PRO</h1><h2>I think you are football genius. you have outstanding insight</h2>';
          break;
        case 100 :
-         $msg = 'I\'m sure you are Pep Guardiola or Jurgen Klopp you have eagle eye';
+         $msg = '<h1>WORLD CLASS</h1><h2>Unbelievable I\'m sure you are Pep Guardiola or Jurgen Klopp</h2>';
          break;
      }
      return $msg;

@@ -75,7 +75,7 @@ function glob_setup() {
 	 * specifically font, colors, icons, and column width.
 	 */
     add_editor_style( get_template_directory_uri().'/assets/css/editor-style.css' );
-   
+
 }
 endif;
 add_action( 'after_setup_theme', 'glob_setup' );
@@ -157,7 +157,7 @@ function glob_widgets_init() {
 		'before_title'  => '<h4 class="block-title">',
 		'after_title'   => '</h4>',
 	) );
-   
+
     register_sidebar( array(
         'name'          => esc_html__( 'Footer 1', 'glob' ),
         'id'            => 'footer-1',
@@ -254,7 +254,7 @@ function glob_scripts() {
 	wp_enqueue_script( 'classie', get_template_directory_uri() . '/assets/js/classie.js', $version, true );
 	wp_enqueue_script( 'glob-sidebar-menu', get_template_directory_uri() . '/assets/js/sidebar-menu.js', array( 'jquery', 'classie' ), $version, true );
 	wp_enqueue_script( 'jquery-inview', get_template_directory_uri() . '/assets/js/inview.js', array( 'jquery' ), $version, true );
-   
+
 	wp_enqueue_script( 'glob-themes-js', get_template_directory_uri() . '/assets/js/themes.js', array( 'jquery', 'glob-sidebar-menu', 'jquery-slick', 'jquery-inview' ), $version, true );
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -299,7 +299,7 @@ require get_template_directory() . '/inc/plugins-recommend.php';
  * Register widgets
  */
 function glob_register_widgets(){
-   
+
         $widgets = array(
             'Glob_Widget_Block_1',
             'Glob_Widget_Block_2',
@@ -309,7 +309,7 @@ function glob_register_widgets(){
             'Glob_Widget_Recent_Posts',
             'Glob_Widget_Social',
         );
-    
+
     foreach ( $widgets as $class_name ) {
         if ( class_exists( $class_name ) ) {
             register_widget( $class_name );
@@ -317,3 +317,7 @@ function glob_register_widgets(){
     }
 }
 add_action( 'widgets_init', 'glob_register_widgets');
+
+function babobao(){
+	alert('babo');
+}

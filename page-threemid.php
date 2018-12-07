@@ -11,7 +11,8 @@
  */
 
 get_header(); ?>
-<?php require('lib/print.php'); ?>
+<?php require('lib/print.php');?>
+<?php require('lib/code/player.php'); ?>
 <?php $conn = sql_connect(); ?>
 
 <?php
@@ -23,7 +24,7 @@ get_header(); ?>
   <?php call_nav() ?>
 
 	<div class="main">
-      <h3 class="extra_money">Best 3 MF Combination <font color='yellow'>10 $</font></h3>
+      <h3 class="extra_money">BEST MF COMBINATION <font color='black'>10 $</font></h3>
       <div class="game-item threemid">
         <?php
         $num = 0;
@@ -39,23 +40,22 @@ get_header(); ?>
               ?>
               <div style="display: flex; flex-direction: column">
                 <input type="image" class = "img_cell mid <?= $player['name']; ?>" value=<?= json_encode($player);
+                $src = $arr_threemid[$player['name']];
                 ?>
-                src = <?= return_src() ?>wp-content/uploads/threemid/<?= $player['name']; ?>.png onclick="threetop_select(this);">
-                <h6><?= $player['name'] ?></h6>
+                src = <?= return_src($src) ?> onclick="threetop_select(this);"> <h6><?= $player['name'] ?></h6>
               </div>
               <?php
           }
          ?>
       </div>
-      <form action=<?= return_url() ?>threemid_process method="post" style="margin: 20px auto">
+      <form action=<?= return_url().'threemid_process' ?> method="post" style="margin: 20px auto">
         <input type="hidden" id="player_list" name="player_list" value="">
-        <input type="submit" value="submit">
+        <input type="submit" id = "btn_submit" value="submit">
       </form>
 	</div>
 
-	<div class="aside">
-		AD
-	</div>
+  <?= call_ad(); ?>
+
 </div>
 
 <?php get_sidebar(); ?>

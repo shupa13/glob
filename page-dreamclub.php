@@ -19,16 +19,17 @@
   <?php call_nav() ?>
 
 	<div class="main">
-    <h3 class="dream_category">BIRTHDAY</h3>
-    <div class="game-item dreamclub">
-      <img class="img_cell selector dream" src=<?= return_src() ?>wp-content/uploads/dreamclub/party.png onclick="select_dream('party')">
-      <img class="img_cell selector dream" src=<?= return_src() ?>wp-content/uploads/dreamclub/club.png onclick="select_dream('club')">
-    </div>
+    <h3 class="game-item desc"></h3>
+    <div class="game-item option"></div>
+    <script>
+    (function(){
+      dreamclub_init();
+      }())
+    </script>
 	</div>
 
-	<div class="aside">
-		AD
-	</div>
+  <?= call_ad(); ?>
+
 </div>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

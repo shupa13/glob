@@ -67,7 +67,11 @@
 		<div class="site-info">
 			<div class="container">
 				<?php if ( has_nav_menu( 'footer' ) ) wp_nav_menu( array( 'theme_location' => 'footer' , 'container_class' => 'footer-menu' ) ) ?>
-				<?php do_action('glob_footer_site_info'); 	?>
+				<img src="http://shupa13.cafe24.com/wp-content/uploads/2018/12/site_logo.png" class="thumbnail" />
+				<a href="https://www.instagram.com/_football_dor/">
+					<img src="http://shupa13.cafe24.com/wp-content/uploads/2018/12/inst.png">
+					<h5>INSTAGRAM : _football_dor</h5>
+				</a>
 			</div>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->

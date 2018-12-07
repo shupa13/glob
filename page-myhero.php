@@ -18,17 +18,17 @@ get_header(); ?>
 	<?php call_nav() ?>
 
 	<div class="main">
-		<div class="game-item myhero"></div>
+		<h3 class="game-item desc"></h3>
+		<div class="game-item option"></div>
 		<script>
 		(function(){
-			myhero_initiailizing();
+			myhero_init();
 			}())
  		</script>
 	</div>
 
-	<div class="aside">
-		AD
-	</div>
+	<?= call_ad(); ?>
+
 </div>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

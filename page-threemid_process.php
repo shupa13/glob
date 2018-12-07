@@ -12,6 +12,8 @@
 
 get_header(); ?>
 <?php require('lib/print.php'); ?>
+<?php require('lib/code/player.php'); ?>
+
 <?php $conn = sql_connect(); ?>
 <?php
   $my_list = explode(',', $_POST['player_list']);
@@ -63,20 +65,26 @@ get_header(); ?>
     <?php call_nav() ?>
 
   	<div class="main">
-      <h3 class="extra_money">10$ MF <font color = '#fedf00'> COMBINATION</font></h3>
+      <h3 class="extra_money">MF COMBINATION <font color = 'black'> 10$</font></h3>
       <div class="game-item threemid-res">
         <?php
            for($i=0; $i<count($my_list); $i++){
+             $src = $arr_threemid[$my_list[$i]];
              ?>
              <div style="display: grid">
-               <img class = "img_cell result" src = <?= return_src() ?>wp-content/uploads/threemid/<?= $my_list[$i]; ?>.png>
+               <img class = "img_cell result" src = <?= return_src($src) ?>>
                <h3><?= $my_list[$i] ?></h3>
              </div>
              <?php
            }
          ?>
        </div>
-         <?php echo do_shortcode('[TheChamp-Sharing url="https://www.naver.com" style=""]') ?>
+       <div class = "sns_share">
+         <?php echo do_shortcode('[korea_sns_pro_button link="http://footballdor.com/threemid" title="10$ MF COMBINATION"]') ?>
+         <?php echo do_shortcode('[TheChamp-Sharing url="http://footballdor.com/threemid" style=""]') ?>
+       </div>
+
+        <h3 class = "selected" >MOST SELECTED</h3>
          <div class="vote-menu">
            <button type="button" id = "vote_A" value =<?= $arr[0] ?> onclick="vote_category(this)">ALL</button>
            <button type="button" id = "vote_5" value =<?= $arr[1] ?> onclick="vote_category(this)">5$</button>
@@ -84,10 +92,11 @@ get_header(); ?>
            <button type="button" id = "vote_2" value =<?= $arr[3] ?> onclick="vote_category(this)">2$</button>
            <button type="button" id = "vote_C" value =<?= $comb ?> onclick="vote_combi(this)">COMBI</button>
          </div>
-         <div class="mid_category"></div>
+         <div class="vote_result"></div>
          <input type="hidden" id = "total_participants" value=<?= $participants ?>>
     </div>
-  	<div class="aside">AD</div>
+    <?= call_ad(); ?>
+
   </div>
 
  <?php

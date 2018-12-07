@@ -12,6 +12,7 @@
 
 get_header(); ?>
 <?php require('lib/print.php'); ?>
+<?php require('lib/code/thumb.php'); ?>
 <?php $conn = sql_connect(); ?>
 <?php $dream = explode(',',$_POST['dream']); ?>
 <?php
@@ -21,30 +22,29 @@ get_header(); ?>
   .$dream[1].'" and SM ="'
   .$dream[2].'" and HY ="'
   .$dream[3].'"';
+
   $result = mysqli_query($conn,$sql);
   $row = mysqli_fetch_array($result);
  ?>
 
 <div class="container game">
   <?php call_nav() ?>
-
-
 	<div class="main">
-    <div style="display:flex; flex-direction: column">
-      <img class = "img_cell" style="width:80%; margin:auto" src = <?= return_src() ?>wp-content/uploads/inner_thumbnail/dreamclub.jpg>
-      <div style = "display: flex; flex-direction: column; padding: 30px 10px; margin : 10px auto; width: 80%; background-color:#efefef; border-radius: 5px">
-        <div style="display: flex">
-          <img style="float: left; margin: auto; width: 40px; height: 100%" src =<?= return_src() ?>wp-content/uploads/emblem/<?= $row['club'] ?>.png >
-          <h4 style="font-weight: bold; float: left; margin: auto 10px; flex-grow: 1"><?= $row['club'] ?></h4>
+    <div class="game-item res">
+      <img class = "img_cell" src = <?= return_src($arr_thumb_inr['dreamclub']) ?>>
+
+      <div>
+        <h1><?= $row['club'] ?></h1>
+        <h4>MY DREAM CLUB</h4>
+        <div class = "sns_share">
+          <?php echo do_shortcode('[korea_sns_pro_button link="http://footballdor.com/dreamclub" title="WHERE IS MY DREAM CLUB ?"]') ?>
+          <?php echo do_shortcode('[TheChamp-Sharing url="http://footballdor.com/dreamclub" style=""]') ?>
         </div>
-        <?php echo do_shortcode('[TheChamp-Sharing url="https://www.naver.com" style=""]') ?>
       </div>
     </div>
 	</div>
+  <?= call_ad(); ?>
 
-	<div class="aside">
-		AD
-	</div>
 </div>
 
 <?php get_sidebar(); ?>

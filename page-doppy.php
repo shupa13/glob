@@ -14,11 +14,12 @@
 
 get_header(); ?>
 <?php require('lib/print.php'); ?>
+<?php require('lib/code/thumb.php'); ?>
 
 <div class="container game">
 	<?php call_nav() ?>
 	<div class="main">
-			<img src=<?= return_src() ?>wp-content/uploads/inner_thumbnail/doppy.png style="width: 100%; padding-left: 20px; padding-right: 20px" />
+			<img src= <?= return_src($arr_thumb_inr['doppy']) ?> class="thumbnail" />
 			<div class="game-item doppy">
 				<h5>Who is my doppleganger ?</h5>
 
@@ -29,7 +30,7 @@ get_header(); ?>
 				</form>
 		</div>
 	</div>
-	<div class="aside">AD</div>
+	<?= call_ad(); ?>
 </div>
 	<?php get_sidebar(); ?>
 	<?php get_footer(); ?>

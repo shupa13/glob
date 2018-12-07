@@ -13,9 +13,14 @@
 get_header(); ?>
 <?php require('lib/print.php'); ?>
 
-<?php while ( have_posts() ) : the_post(); ?>
-	<?php get_template_part( 'content', 'page' ); ?>
-<?php endwhile; ?>
-
+<div style="margin: 30px auto; display: flex">
+	<div class="contact_form" style="margin-right: 30px">
+		<h1> OPINION </h1>
+		<h2>THANK YOU FOR OPINIOR</h2>
+	</div>
+	<div>
+		<?php echo do_shortcode('[contact-form-7 id="218" title="Contact form 1"]'); ?>
+	</div>
+</div>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
